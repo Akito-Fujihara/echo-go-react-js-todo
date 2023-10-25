@@ -20,6 +20,10 @@ services:
       dockerfile: docker/backend/Dockerfile
     container_name: backend
     working_dir: /backend
+    environment:
+      MYSQL_DATABASE: maindb
+      MYSQL_USER: todouser
+      MYSQL_PASSWORD: todopassword
     volumes:
       - ./backend:/backend
     tty: true
