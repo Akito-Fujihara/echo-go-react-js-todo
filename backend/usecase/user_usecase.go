@@ -10,20 +10,20 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type IUserUseCase interface {
+type IUserUsecase interface {
 	SignUp(user *model.User) (model.UserResponse, error)
-	Login(user *model.User) (model.UserResponse, error)
+	Login(user *model.User) (string, error)
 }
 
-type userUseCase struct {
+type userUsecase struct {
 	ur repository.IUserRepository
 }
 
-func NewUserUseCase(ur repository.IUserRepository) IUserUseCase {
-	return &userUseCase{ur}
+func NewUserUsecase(ur repository.IUserRepository) IUserUsecase {
+	return &userUsecase{ur}
 }
 
-func (uu *userUseCase) SignUp(user *model.User) (model.UserResponse, error) {
+func (uu *userUsecase) SignUp(user *model.User) (model.UserResponse, error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(user.PassWord), 10)
 	if err != nil {
 		return model.UserResponse{}, err
@@ -38,7 +38,7 @@ func (uu *userUseCase) SignUp(user *model.User) (model.UserResponse, error) {
 
 	return model.UserResponse{}, nil
 }
-func (uu *userUseCase) Login(user model.User) (string, error) {
+func (uu *userUsecase) Login(user model.User) (string, error) {
 	storedUser := model.User{}
 	if err := uu.ur.GetUserByEmail(&storedUser, user.Email); err != nil {
 		return "", err
