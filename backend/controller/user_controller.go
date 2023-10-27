@@ -11,20 +11,20 @@ import (
 )
 
 type IUserController interface {
-	SignUP(c echo.Context) error
-	Login(c echo.Context) error
-	Logout(c echo.Context) error
+	SignUp(c echo.Context) error
+	LogIn(c echo.Context) error
+	LogOut(c echo.Context) error
 }
 
 type userController struct {
-	uu usecase.IUserUseCase
+	uu usecase.IUserUsecase
 }
 
-func NewUserController(uu usecase.IUserUseCase) IUserController {
+func NewUserController(uu usecase.IUserUsecase) IUserController {
 	return &userController{uu}
 }
 
-func (uc *userController) SignUP(c echo.Context) error {
+func (uc *userController) SignUp(c echo.Context) error {
 	user := model.User{}
 	if err := c.Bind(&user); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
@@ -36,7 +36,7 @@ func (uc *userController) SignUP(c echo.Context) error {
 	return c.JSON(http.StatusCreated, userRes)
 }
 
-func (uc *userController) Login(c echo.Context) error {
+func (uc *userController) LogIn(c echo.Context) error {
 	user := model.User{}
 	if err := c.Bind(&user); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
@@ -57,7 +57,7 @@ func (uc *userController) Login(c echo.Context) error {
 	return c.NoContent(http.StatusOK)
 }
 
-func (uc *userController) Logout(c echo.Context) error {
+func (uc *userController) LogOut(c echo.Context) error {
 	cookie := new(http.Cookie)
 	cookie.Name = "token"
 	cookie.Value = ""

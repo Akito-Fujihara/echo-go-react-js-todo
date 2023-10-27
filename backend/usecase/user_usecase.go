@@ -11,8 +11,8 @@ import (
 )
 
 type IUserUsecase interface {
-	SignUp(user *model.User) (model.UserResponse, error)
-	Login(user *model.User) (string, error)
+	SignUp(user model.User) (model.UserResponse, error)
+	Login(user model.User) (string, error)
 }
 
 type userUsecase struct {
@@ -23,7 +23,7 @@ func NewUserUsecase(ur repository.IUserRepository) IUserUsecase {
 	return &userUsecase{ur}
 }
 
-func (uu *userUsecase) SignUp(user *model.User) (model.UserResponse, error) {
+func (uu *userUsecase) SignUp(user model.User) (model.UserResponse, error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(user.PassWord), 10)
 	if err != nil {
 		return model.UserResponse{}, err
@@ -49,7 +49,7 @@ func (uu *userUsecase) Login(user model.User) (string, error) {
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"user_id": storedUser.ID,
-		"exp":     time.Now().Add(time.Hour * 2).Unix(),
+		"exp":     time.Now().Add(time.Hour * 12).Unix(),
 	})
 	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
 	if err != nil {
