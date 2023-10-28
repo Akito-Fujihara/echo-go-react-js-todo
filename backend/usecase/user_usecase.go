@@ -28,16 +28,17 @@ func (uu *userUsecase) SignUp(user model.User) (model.UserResponse, error) {
 	if err != nil {
 		return model.UserResponse{}, err
 	}
-	newUser := model.User{
-		Email:    user.Email,
-		PassWord: string(hash),
-	}
+	newUser := model.User{Email: user.Email, PassWord: string(hash)}
 	if err := uu.ur.CreateUser(&newUser); err != nil {
 		return model.UserResponse{}, err
 	}
-
-	return model.UserResponse{}, nil
+	resUser := model.UserResponse{
+		ID:    newUser.ID,
+		Email: newUser.Email,
+	}
+	return resUser, nil
 }
+
 func (uu *userUsecase) Login(user model.User) (string, error) {
 	storedUser := model.User{}
 	if err := uu.ur.GetUserByEmail(&storedUser, user.Email); err != nil {
