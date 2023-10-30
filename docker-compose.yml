@@ -24,6 +24,7 @@ services:
       MYSQL_DATABASE: maindb
       MYSQL_USER: todouser
       MYSQL_PASSWORD: todopassword
+      API_DOMAIN: localhost
     volumes:
       - ./backend:/backend
     tty: true
