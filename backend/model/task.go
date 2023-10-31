@@ -13,7 +13,7 @@ type Task struct {
 
 type TaskResponse struct {
 	ID        uint      `json:"id" gorm:"primary_key"`
-	Tile      string    `json:"title" gorm:"not null"`
+	Title     string    `json:"title" gorm:"not null"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdateAt  time.Time `json:"update_at"`
 }
