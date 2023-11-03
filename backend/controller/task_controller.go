@@ -10,7 +10,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type ITaskRepository interface {
+type ITaskController interface {
 	GetAllTasks(c echo.Context) error
 	GetTaskById(c echo.Context) error
 	CreateTask(c echo.Context) error
@@ -22,7 +22,7 @@ type taskController struct {
 	tu usecase.ITaskUsecase
 }
 
-func NewTaskController(tu usecase.ITaskUsecase) ITaskRepository {
+func NewTaskController(tu usecase.ITaskUsecase) ITaskController {
 	return &taskController{tu}
 }
 
