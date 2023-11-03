@@ -25,7 +25,7 @@ func NewTaskRepository(db *gorm.DB) ITaskRepository {
 }
 
 func (tr *taskRepository) GetAllTasks(tasks *[]model.Task, userId uint) error {
-	if err := tr.db.Joins("User").Where("user_id=?", userId).Order(("created_at")).Find(tasks).Error; err != nil {
+	if err := tr.db.Joins("User").Where("user_id=?", userId).Order("created_at").Find(tasks).Error; err != nil {
 		return err
 	}
 	return nil
@@ -51,7 +51,7 @@ func (tr *taskRepository) UpdateTask(task *model.Task, userId uint, taskId uint)
 		return result.Error
 	}
 	if result.RowsAffected < 1 {
-		return fmt.Errorf("object not found")
+		return fmt.Errorf("object does not exist")
 	}
 	return nil
 }
@@ -62,7 +62,7 @@ func (tr *taskRepository) DeleteTask(userId uint, taskId uint) error {
 		return result.Error
 	}
 	if result.RowsAffected < 1 {
-		return fmt.Errorf("object not found")
+		return fmt.Errorf("object does not exist")
 	}
 	return nil
 }
