@@ -6,7 +6,7 @@ import (
 
 	"github.com/Akito-Fujihara/echo-go-react-js-todo/backend/model"
 	"github.com/Akito-Fujihara/echo-go-react-js-todo/backend/usecase"
-	"github.com/golang-jwt/jwt/v4"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/labstack/echo/v4"
 )
 

@@ -6,7 +6,7 @@ import (
 
 	"github.com/Akito-Fujihara/echo-go-react-js-todo/backend/model"
 	"github.com/Akito-Fujihara/echo-go-react-js-todo/backend/repository"
-	"github.com/golang-jwt/jwt/v4"
+	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
 
