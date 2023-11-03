@@ -25,6 +25,7 @@ services:
       MYSQL_USER: todouser
       MYSQL_PASSWORD: todopassword
       API_DOMAIN: localhost
+      SECRET: uu5pveql
     volumes:
       - ./backend:/backend
     tty: true
