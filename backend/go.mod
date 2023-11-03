@@ -3,6 +3,7 @@ module github.com/Akito-Fujihara/echo-go-react-js-todo/backend
 go 1.19
 
 require (
+	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
 	github.com/golang-jwt/jwt/v5 v5.0.0
 	github.com/labstack/echo-jwt/v4 v4.2.0
 	github.com/labstack/echo/v4 v4.11.2
