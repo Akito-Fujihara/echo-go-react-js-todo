@@ -24,11 +24,11 @@ func NewUserUsecase(ur repository.IUserRepository) IUserUsecase {
 }
 
 func (uu *userUsecase) SignUp(user model.User) (model.UserResponse, error) {
-	hash, err := bcrypt.GenerateFromPassword([]byte(user.PassWord), 10)
+	hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 	if err != nil {
 		return model.UserResponse{}, err
 	}
-	newUser := model.User{Email: user.Email, PassWord: string(hash)}
+	newUser := model.User{Email: user.Email, Password: string(hash)}
 	if err := uu.ur.CreateUser(&newUser); err != nil {
 		return model.UserResponse{}, err
 	}
@@ -44,7 +44,7 @@ func (uu *userUsecase) Login(user model.User) (string, error) {
 	if err := uu.ur.GetUserByEmail(&storedUser, user.Email); err != nil {
 		return "", err
 	}
-	err := bcrypt.CompareHashAndPassword([]byte(storedUser.PassWord), []byte(user.PassWord))
+	err := bcrypt.CompareHashAndPassword([]byte(storedUser.Password), []byte(user.Password))
 	if err != nil {
 		return "", err
 	}

@@ -48,11 +48,11 @@ func (uc *userController) LogIn(c echo.Context) error {
 	cookie := new(http.Cookie)
 	cookie.Name = "token"
 	cookie.Value = tokenString
-	cookie.Expires = time.Now().Add(time.Hour * 2)
+	cookie.Expires = time.Now().Add(24 * time.Hour)
 	cookie.Path = "/"
 	cookie.Domain = os.Getenv("API_DOMAIN")
 	cookie.HttpOnly = true
-	cookie.SameSite = http.SameSiteLaxMode
+	cookie.SameSite = http.SameSiteNoneMode
 	c.SetCookie(cookie)
 	return c.NoContent(http.StatusOK)
 }
@@ -65,7 +65,7 @@ func (uc *userController) LogOut(c echo.Context) error {
 	cookie.Path = "/"
 	cookie.Domain = os.Getenv("API_DOMAIN")
 	cookie.HttpOnly = true
-	cookie.SameSite = http.SameSiteLaxMode
+	cookie.SameSite = http.SameSiteNoneMode
 	c.SetCookie(cookie)
 	return c.NoContent(http.StatusOK)
 }
