@@ -1,4 +1,15 @@
 services:
+  frontend:
+    image: node:18.1.0
+    container_name: frontend
+    working_dir: /usr/src/app
+    volumes:
+      - ./react-todo:/usr/src/app
+    command: sh -c "npm run start"
+    tty: true
+    ports:
+      - "3000:3000"
+
   db:
     image: mysql:8.0
     container_name: db
