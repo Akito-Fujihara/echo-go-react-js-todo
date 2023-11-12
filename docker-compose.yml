@@ -4,7 +4,7 @@ services:
     container_name: frontend
     working_dir: /usr/src/app
     environment:
-      REACT_APP_API_URL: http://backend:8080
+      REACT_APP_API_URL: http://localhost:8080
     volumes:
       - ./react-todo:/usr/src/app
     command: sh -c "npm run start"
